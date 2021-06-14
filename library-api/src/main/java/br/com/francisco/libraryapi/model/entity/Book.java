@@ -1,4 +1,4 @@
-package br.com.francisco.libraryapi.api.dto;
+package br.com.francisco.libraryapi.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class BookDto {
+@NoArgsConstructor
+public class Book {
 	
 	private Long id;
 	private String title;
