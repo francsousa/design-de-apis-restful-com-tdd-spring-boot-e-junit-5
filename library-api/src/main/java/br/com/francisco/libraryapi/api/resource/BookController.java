@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.francisco.libraryapi.api.dto.BookDto;
 import br.com.francisco.libraryapi.api.exception.ApiErrors;
+import br.com.francisco.libraryapi.exception.BusinessException;
 import br.com.francisco.libraryapi.model.entity.Book;
 import br.com.francisco.libraryapi.service.BookService;
 
@@ -44,5 +45,11 @@ public class BookController {
 		BindingResult bindingResult = ex.getBindingResult();
 		
 		return new ApiErrors(bindingResult);
+	}
+	
+	@ExceptionHandler(BusinessException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ApiErrors handleBusinessException(BusinessException ex) {
+		return new ApiErrors(ex);
 	}
 }
