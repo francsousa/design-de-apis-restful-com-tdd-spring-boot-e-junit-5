@@ -1,5 +1,7 @@
 package br.com.francisco.libraryapi.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import br.com.francisco.libraryapi.exception.BusinessException;
@@ -23,5 +25,10 @@ public class BookServiceImpl implements BookService {
 		}
 		
 		return repository.save(book);
+	}
+
+	@Override
+	public Optional<Book> getById(Long id) {
+		return null;
 	}
 }
