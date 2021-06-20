@@ -1,6 +1,8 @@
 package br.com.francisco.libraryapi.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 
@@ -106,6 +108,28 @@ public class BookServiceTest {
 		
 		// verificações
 		assertThat(book.isPresent()).isFalse();
+	}
+	
+	@Test
+	@DisplayName("Deve deletar um livro")
+	public void deleteBookTest() {
+		Book book = Book.builder().id(1L).build();
+		
+		// execução
+		assertDoesNotThrow(() -> service.delete(book));
+		
+		// verificações
+		Mockito.verify(repository, Mockito.times(1)).delete(book);
+	}
+	
+	@Test
+	@DisplayName("Deve ocorrer erro ao tentar deletar um livro inexistente")
+	public void deleteInvalidBookTest() {
+		Book book = new Book();
+		
+		assertThrows(IllegalArgumentException.class, () -> service.delete(book));
+		
+		Mockito.verify(repository, Mockito.never()).delete(book);
 	}
 	
 	private Book createValidBook() {
